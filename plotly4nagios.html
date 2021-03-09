@@ -1,10 +1,21 @@
 <head>
 	<!-- Load plotly.js into the DOM -->
-	<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+	<script src='plotly-latest.min.js'></script>
+	
 </head>
 
 <body>
 	<div id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
 </body>
+<script src="d3-time.v2.min.js"></script>
+<script src="d3-time-format.v3.min.js"></script>
+<script>
+
+var format = d3.timeFormat("%B %d, %Y");
+var parseTime = d3.timeParse("%s");
+
+
+
+</script>
 <script src="plotly4nagios.js"></script>
 
