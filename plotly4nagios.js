@@ -1,5 +1,4 @@
-//Plotly.d3.csv("https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv", function(err, rows){
-Plotly.d3.csv("nagios.csv", function(err, rows){
+Plotly.d3.csv("https://raw.githubusercontent.com/vignesh88/plotly4nagios/main/nagios.csv", function(err, rows){
 
   function unpack(rows, key) {
   return rows.map(function(row) { return row[key]; });
