@@ -1,20 +1,60 @@
 <head>
 	<!-- Load plotly.js into the DOM -->
 	<script src='js/plotly-latest.min.js'></script>
-	
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/moment.min.js"></script>
+	<script type="text/javascript" src="js/daterangepicker.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/daterangepicker.css" />
+
 </head>
 
 <body>
-	<div id='DIV_allinone'><!-- Plotly chart will be drawn inside this DIV --></div>
-	<div id='DIV_per_metrics'><!-- Plotly chart will be drawn inside this DIV --></div>
+	<div id="reportrange"
+		style="background: #fff; margin: auto; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 50%">
+		<i class="fa fa-calendar"></i>&nbsp;
+		<span></span> <i class="fa fa-caret-down"></i>
+	</div>
+
+	<script type="text/javascript">
+		$(function () {
+
+			var start = moment().subtract(29, 'days');
+			var end = moment();
+
+			function cb(start, end) {
+				$('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+				console.log(start.format('MMMM D, YYYY'));
+			}
+
+			$('#reportrange').daterangepicker({
+				startDate: start,
+				endDate: end,
+				ranges: {
+					'Today': [moment(), moment()],
+					'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+					'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+					'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+					'This Month': [moment().startOf('month'), moment().endOf('month')],
+					'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1,
+						'month').endOf('month')]
+				}
+			}, cb);
+
+			cb(start, end);
+
+		});
+	</script>
+	<div id='DIV_allinone'>
+		<!-- Plotly chart will be drawn inside this DIV -->
+	</div>
+	<div id='DIV_per_metrics'>
+		<!-- Plotly chart will be drawn inside this DIV -->
+	</div>
 </body>
 <script src="js/d3-time.v2.min.js"></script>
 <script src="js/d3-time-format.v3.min.js"></script>
 <script>
-
-var format = d3.timeFormat("%B %d, %Y");
-var parseTime = d3.timeParse("%s");
-
+	var format = d3.timeFormat("%B %d, %Y");
+	var parseTime = d3.timeParse("%s");
 </script>
 <script src="js/plotly4nagios.js"></script>
-
