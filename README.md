@@ -2,4 +2,4 @@
 plotly4nagios
 
 ## Screenshot
-![Alt text](newplot.png?raw=true "Title")
+![Alt text](img/screenshot.png?raw=true "Title")

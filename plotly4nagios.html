@@ -1,21 +1,20 @@
 <head>
 	<!-- Load plotly.js into the DOM -->
-	<script src='plotly-latest.min.js'></script>
+	<script src='js/plotly-latest.min.js'></script>
 	
 </head>
 
 <body>
-	<div id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
+	<div id='DIV_allinone'><!-- Plotly chart will be drawn inside this DIV --></div>
+	<div id='DIV_per_metrics'><!-- Plotly chart will be drawn inside this DIV --></div>
 </body>
-<script src="d3-time.v2.min.js"></script>
-<script src="d3-time-format.v3.min.js"></script>
+<script src="js/d3-time.v2.min.js"></script>
+<script src="js/d3-time-format.v3.min.js"></script>
 <script>
 
 var format = d3.timeFormat("%B %d, %Y");
 var parseTime = d3.timeParse("%s");
 
-
-
 </script>
-<script src="plotly4nagios.js"></script>
+<script src="js/plotly4nagios.js"></script>
 
