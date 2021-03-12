@@ -5,10 +5,12 @@
 	<script type="text/javascript" src="js/moment.min.js"></script>
 	<script type="text/javascript" src="js/daterangepicker.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/daterangepicker.css" />
+	<link rel="stylesheet" type="text/css" href="css/plotly4nagios.css" />
 
 </head>
 
 <body>
+	<h1 style="text-align: center">Nagios Monitoring Performance Report </h1>
 	<div id="reportrange"
 		style="background: #fff; margin: auto; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 50%">
 		<i class="fa fa-calendar"></i>&nbsp;
@@ -18,12 +20,23 @@
 	<script type="text/javascript">
 		$(function () {
 
-			var start = moment().subtract(29, 'days');
+			var start = moment().subtract(1, 'days');
 			var end = moment();
 
 			function cb(start, end) {
 				$('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-				console.log(start.format('MMMM D, YYYY'));
+				console.log(start.format('YYYY-MM-DD'));
+				console.log(GetQueryString("host"));
+				if (start.format('X') == moment().subtract(1, 'days').format('X')) {
+					console.log(start.format('X'))
+				} else {
+					console.log('secondtime')
+					url =
+						"https://nagiospreprod.statebanktimes.in/pnp4nagios/xport/csv?host=" +
+						GetQueryString("host") + "&srv=" + GetQueryString("srv") + "&start=" + start.format(
+							'YYYY-MM-DD H:mm') + "&end=" + end.format('YYYY-MM-DD H:mm') + "&view=" + GetQueryString("view");
+					generate_graph(url);
+				}
 			}
 
 			$('#reportrange').daterangepicker({
@@ -44,12 +57,17 @@
 
 		});
 	</script>
+	<div id="loading"></div>
+
 	<div id='DIV_allinone'>
 		<!-- Plotly chart will be drawn inside this DIV -->
 	</div>
 	<div id='DIV_per_metrics'>
 		<!-- Plotly chart will be drawn inside this DIV -->
 	</div>
+
+
+
 </body>
 <script src="js/d3-time.v2.min.js"></script>
 <script src="js/d3-time-format.v3.min.js"></script>

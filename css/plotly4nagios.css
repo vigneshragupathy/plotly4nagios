@@ -1,5 +1,15 @@
 .center-block {
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-  }
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#loading {
+  background: url('../img/loading.gif') no-repeat center center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 9999999;
+}
