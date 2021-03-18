@@ -1,5 +1,47 @@
 var LocString = String(window.document.location.href);
 
+
+$(function () {
+
+  var start = moment().subtract(1, 'days');
+  var end = moment();
+
+  function cb(start, end) {
+    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    console.log(start.format('YYYY-MM-DD'));
+    console.log(GetQueryString("host"));
+    if (start.format('X') == moment().subtract(1, 'days').format('X')) {
+      console.log(start.format('X'))
+    } else {
+      console.log('secondtime')
+      url =
+        "https://nagios.vikki.in/pnp4nagios/xport/csv?host=" +
+        GetQueryString("host") + "&srv=" + GetQueryString("srv") + "&start=" + start.format(
+          'YYYY-MM-DD H:mm') + "&end=" + end.format('YYYY-MM-DD H:mm') + "&view=" + GetQueryString(
+          "view");
+      generate_graph(url);
+    }
+  }
+
+  $('#reportrange').daterangepicker({
+    startDate: start,
+    endDate: end,
+    ranges: {
+      'Today': [moment(), moment()],
+      'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+      'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+      'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+      'This Month': [moment().startOf('month'), moment().endOf('month')],
+      'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1,
+        'month').endOf('month')]
+    }
+  }, cb);
+
+  cb(start, end);
+
+});
+
+
 function GetQueryString(str) {
   var rs = new RegExp("(^|)" + str + "=([^\&]*)(\&|$)", "gi").exec(LocString),
     tmp;
@@ -14,50 +56,45 @@ function clear_div(div) {
   }
 }
 
-function show_loading_img(id) {
-  var img = document.createElement("img");
-  img.src = "img/loading.gif";
-  var src = document.getElementById(id);
-  src.appendChild(img);
-  document.getElementById(id).setAttribute("align", "center");
+
+function loadXML() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      parseXML(this);
+    }
+  };
+  xhttp.open("GET", "../Network_usage.xml", true);
+  xhttp.send();
 }
 
-function hide_loading_img(id) {
-  //var img = document.getElementById("img");
-  //var src = document.getElementById(id);
-  //console.log(src.childNodes)
-  //src.removeChild(img);
-  var img = document.getElementById(id).lastChild;
-
-  document.getElementById(id).removeChild(img);
-
-
+function parseXML(xml) {
+  var i;
+  var xmlDoc = xml.responseXML;
+  var x = xmlDoc.getElementsByTagName("DATASOURCE");
+  //for (i = 0; i < x.length; i++) {
+  var Unit = x[0].getElementsByTagName("UNIT")[0].childNodes[0].nodeValue;
+  //var Name =  x[i].getElementsByTagName("NAME")[0].childNodes[0].nodeValue;
+  //}
+  //document.getElementById("demo").innerHTML = table;
+  generate_graph(url, Unit);
 }
 
 
-var url = "https://nagiospreprod.statebanktimes.in/pnp4nagios/xport/csv?host=" + GetQueryString("host") + "&srv=" + GetQueryString("srv") + "&start=" + GetQueryString("start") + "&end=" + GetQueryString("end") + "&view=" + GetQueryString("view");
-var url = "https://raw.githubusercontent.com/vignesh88/plotly4nagios/main/nagios.csv"
+var url = "https://nagios.vikki.in/pnp4nagios/xport/csv?host=" + GetQueryString("host") + "&srv=" + GetQueryString("srv") + "&start=" + GetQueryString("start") + "&end=" + GetQueryString("end") + "&view=" + GetQueryString("view");
+var url = "https://raw.githubusercontent.com/vignesh88/plotly4nagios/main/nagios.csv";
+var url = "nagios.csv";
 console.log(url);
 urlx = window.location.pathname + "?host=" + GetQueryString("host") + "&srv=" + GetQueryString("srv");
-//Plotly.d3.dsv(';')("https://raw.githubusercontent.com/vignesh88/plotly4nagios/main/nagios.csv", function (err, rows) {
-//Plotly.d3.dsv(';')("https://nagiospreprod.statebanktimes.in/pnp4nagios/xport/csv?host=R0ETADVOPSAP001&srv=CPU%20Load", function (err, rows) {
-function generate_graph(url) {
-  //clear_div('DIV_allinone');
-  //clear_div('DIV_per_metrics');
-  //show_loading_img('DIV_allinone');
-  //show_loading_img('DIV_per_metrics');
+
+function generate_graph(url, Unit) {
   $('#loading').show();
-
-
   Plotly.d3.dsv(';')(url, function (err, rows) {
-
     function unpack(rows, key) {
       return rows.map(function (row) {
         return row[key];
       });
     }
-
-
     var monitor_parameters = Object.keys(rows[0]);
     var data_final_all = [];
     var data_final_per_metrics = [];
@@ -69,6 +106,7 @@ function generate_graph(url) {
         console.log(monitor_parameters[i]);
         console.log('x' + j);
         var trace_all = {
+          fill: 'tozeroy',
           type: "scatter",
           mode: "lines+markers",
           name: monitor_parameters[i].replace("_AVERAGE", ""),
@@ -83,6 +121,7 @@ function generate_graph(url) {
       if (monitor_parameters[i].includes("_AVERAGE")) {
         if (j == 1) {
           var trace_all = {
+            fill: 'tonexty',
             type: "scatter",
             mode: "lines+markers",
             name: monitor_parameters[i].replace("_AVERAGE", ""),
@@ -93,6 +132,7 @@ function generate_graph(url) {
           data_final_per_metrics.push(trace_all);
         } else {
           var trace_all = {
+            fill: 'tonexty',
             type: "scatter",
             mode: "lines+markers",
             name: monitor_parameters[i].replace("_AVERAGE", ""),
@@ -106,15 +146,25 @@ function generate_graph(url) {
         }
       }
     }
-
     var data_all = data_final_all;
     var data_per_metics = data_final_per_metrics;
+    console.log(Unit);
 
     var layout_allinone = {
       title: 'Nagios - All in one Graph',
+      plot_bgcolor: "white",
+      paper_bgcolor: "white",
+      font: {
+
+        color: 'black'
+      },
       xaxis: {
         title: 'Date'
-      }
+      },
+      yaxis: {
+        title: "Unit =" + Unit
+      },
+
     };
 
     var layout_per_metrics = {
@@ -127,13 +177,26 @@ function generate_graph(url) {
         rows: 3,
         columns: 3,
         pattern: 'independent'
-      }
+      },
+      yaxis: {
+        title: "Unit =" + Unit
+      },
+
     };
-    //hide_loading_img('DIV_allinone')
-    //hide_loading_img('DIV_per_metrics')
+    var config = {
+
+      displaylogo: false,
+      responsive: true,
+
+
+    };
+
+
     $('#loading').hide();
-    Plotly.newPlot('DIV_allinone', data_all, layout_allinone);
-    Plotly.newPlot('DIV_per_metrics', data_per_metics, layout_per_metrics);
+    Plotly.newPlot('DIV_allinone', data_all, layout_allinone, config);
+    Plotly.newPlot('DIV_per_metrics', data_per_metics, layout_per_metrics, config);
   })
 }
+loadXML();
+
 generate_graph(url);

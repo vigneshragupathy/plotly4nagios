@@ -10,62 +10,29 @@
 </head>
 
 <body>
-	<h1 style="text-align: center">Nagios Monitoring Performance Report </h1>
+	<h1 style="text-align: center">Nagios Performance Monitoring Report </h1>
+
 	<div id="reportrange"
 		style="background: #fff; margin: auto; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 50%">
 		<i class="fa fa-calendar"></i>&nbsp;
 		<span></span> <i class="fa fa-caret-down"></i>
 	</div>
 
-	<script type="text/javascript">
-		$(function () {
-
-			var start = moment().subtract(1, 'days');
-			var end = moment();
-
-			function cb(start, end) {
-				$('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-				console.log(start.format('YYYY-MM-DD'));
-				console.log(GetQueryString("host"));
-				if (start.format('X') == moment().subtract(1, 'days').format('X')) {
-					console.log(start.format('X'))
-				} else {
-					console.log('secondtime')
-					url =
-						"https://nagiospreprod.statebanktimes.in/pnp4nagios/xport/csv?host=" +
-						GetQueryString("host") + "&srv=" + GetQueryString("srv") + "&start=" + start.format(
-							'YYYY-MM-DD H:mm') + "&end=" + end.format('YYYY-MM-DD H:mm') + "&view=" + GetQueryString("view");
-					generate_graph(url);
-				}
-			}
-
-			$('#reportrange').daterangepicker({
-				startDate: start,
-				endDate: end,
-				ranges: {
-					'Today': [moment(), moment()],
-					'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-					'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-					'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-					'This Month': [moment().startOf('month'), moment().endOf('month')],
-					'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1,
-						'month').endOf('month')]
-				}
-			}, cb);
-
-			cb(start, end);
-
-		});
-	</script>
+	
+	<br></br>
 	<div id="loading"></div>
 
 	<div id='DIV_allinone'>
 		<!-- Plotly chart will be drawn inside this DIV -->
 	</div>
+	<br></br>
 	<div id='DIV_per_metrics'>
 		<!-- Plotly chart will be drawn inside this DIV -->
 	</div>
-
+	<!--
+	<button type="button" onclick="loadDoc()">Get my CD collection</button> 
+	<br><br>
+	 <table id="demo"></table>  -->
 
 
 </body>

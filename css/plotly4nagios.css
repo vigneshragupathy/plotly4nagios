@@ -1,3 +1,4 @@
+
 .center-block {
   display: block;
   margin-right: auto;
@@ -12,4 +13,14 @@
   height: 100%;
   width: 100%;
   z-index: 9999999;
+}
+
+#DIV_allinone{
+  height:39vh;
+  
+}
+
+#DIV_per_metrics{
+  height:39vh;
+  
 }
