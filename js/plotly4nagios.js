@@ -5,6 +5,7 @@ function readJSON() {
     window.plot_bgcolor_all = json.plot_bgcolor_all;
     window.paper_bgcolor_all = json.paper_bgcolor_all;
     window.layout_allinone_font_color = json.layout_allinone_font_color;
+    window.url_dynamic = json.url_dynamic + GetQueryString("host") + "&srv=" + GetQueryString("srv") + "&start=" + GetQueryString("start") + "&end=" + GetQueryString("end") + "&view=" + GetQueryString("view");
   });
 }
 readJSON();

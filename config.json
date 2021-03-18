@@ -1,4 +1,5 @@
 {
+    "url_dynamic": "https://nagios.vikki.in/pnp4nagios/xport/csv?host=",
     "url_remote": "https://raw.githubusercontent.com/vignesh88/plotly4nagios/main/nagios.csv",
     "url_local": "nagios.csv",
     "plot_bgcolor_all": "white",
