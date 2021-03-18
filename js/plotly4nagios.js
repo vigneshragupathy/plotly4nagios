@@ -1,3 +1,14 @@
+function readJSON() {
+  $.getJSON("../config.json", function (json) {
+    console.log(json);
+    window.url = json.url_local;
+    window.plot_bgcolor_all = json.plot_bgcolor_all;
+    window.paper_bgcolor_all = json.paper_bgcolor_all;
+    window.layout_allinone_font_color = json.layout_allinone_font_color;
+  });
+}
+readJSON();
+
 var LocString = String(window.document.location.href);
 
 
@@ -41,6 +52,8 @@ $(function () {
 
 });
 
+//var testvalue = readJSON();
+//console.log(testvalue.url);
 
 function GetQueryString(str) {
   var rs = new RegExp("(^|)" + str + "=([^\&]*)(\&|$)", "gi").exec(LocString),
@@ -80,11 +93,6 @@ function parseXML(xml) {
   generate_graph(url, Unit);
 }
 
-
-var url = "https://nagios.vikki.in/pnp4nagios/xport/csv?host=" + GetQueryString("host") + "&srv=" + GetQueryString("srv") + "&start=" + GetQueryString("start") + "&end=" + GetQueryString("end") + "&view=" + GetQueryString("view");
-var url = "https://raw.githubusercontent.com/vignesh88/plotly4nagios/main/nagios.csv";
-var url = "nagios.csv";
-console.log(url);
 urlx = window.location.pathname + "?host=" + GetQueryString("host") + "&srv=" + GetQueryString("srv");
 
 function generate_graph(url, Unit) {
@@ -152,11 +160,11 @@ function generate_graph(url, Unit) {
 
     var layout_allinone = {
       title: 'Nagios - All in one Graph',
-      plot_bgcolor: "white",
-      paper_bgcolor: "white",
+      plot_bgcolor: plot_bgcolor_all,
+      paper_bgcolor: paper_bgcolor_all,
       font: {
 
-        color: 'black'
+        color: layout_allinone_font_color
       },
       xaxis: {
         title: 'Date'
@@ -199,4 +207,11 @@ function generate_graph(url, Unit) {
 }
 loadXML();
 
-generate_graph(url);
+
+
+$(document).ready(function () {
+  //anything in here will only be called/work when the document is ready.
+  console.log(url);
+  generate_graph(url);
+  //call your function in here, instead of bodyonload
+});

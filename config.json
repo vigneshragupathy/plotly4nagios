@@ -1,0 +1,7 @@
+{
+    "url_remote": "https://raw.githubusercontent.com/vignesh88/plotly4nagios/main/nagios.csv",
+    "url_local": "nagios.csv",
+    "plot_bgcolor_all": "white",
+    "paper_bgcolor_all": "white",
+    "layout_allinone_font_color": "black"
+}
