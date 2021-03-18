@@ -5,7 +5,8 @@ function readJSON() {
     window.plot_bgcolor_all = json.plot_bgcolor_all;
     window.paper_bgcolor_all = json.paper_bgcolor_all;
     window.layout_allinone_font_color = json.layout_allinone_font_color;
-    window.url_dynamic = json.url_dynamic + GetQueryString("host") + "&srv=" + GetQueryString("srv") + "&start=" + GetQueryString("start") + "&end=" + GetQueryString("end") + "&view=" + GetQueryString("view");
+    window.url_dynamic_full = json.url_dynamic + GetQueryString("host") + "&srv=" + GetQueryString("srv") + "&start=" + GetQueryString("start") + "&end=" + GetQueryString("end") + "&view=" + GetQueryString("view");
+    window.url_dynamic = json.url_dynamic;
   });
 }
 readJSON();
@@ -27,8 +28,7 @@ $(function () {
     } else {
       console.log('secondtime')
       url =
-        "https://nagios.vikki.in/pnp4nagios/xport/csv?host=" +
-        GetQueryString("host") + "&srv=" + GetQueryString("srv") + "&start=" + start.format(
+        url_dynamic + GetQueryString("host") + "&srv=" + GetQueryString("srv") + "&start=" + start.format(
           'YYYY-MM-DD H:mm') + "&end=" + end.format('YYYY-MM-DD H:mm') + "&view=" + GetQueryString(
           "view");
       generate_graph(url);
