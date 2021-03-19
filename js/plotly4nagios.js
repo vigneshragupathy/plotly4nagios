@@ -1,21 +1,66 @@
+var LocString = String(window.document.location.href);
+
+function GetQueryString(str) {
+  var rs = new RegExp("(^|)" + str + "=([^\&]*)(\&|$)", "gi").exec(LocString),
+    tmp;
+  if (tmp = rs) return tmp[2];
+  return "";
+}
+
+function parseXML(xml, var_url) {
+  var i;
+  var xmlDoc = xml.responseXML;
+  var x = xmlDoc.getElementsByTagName("DATASOURCE");
+  //for (i = 0; i < x.length; i++) {
+  if (x[0].getElementsByTagName("UNIT")[0].childNodes[0] != null) {
+    var Unit = x[0].getElementsByTagName("UNIT")[0].childNodes[0].nodeValue;
+    //var Name =  x[i].getElementsByTagName("NAME")[0].childNodes[0].nodeValue;
+    //}
+    if (Unit.includes("%%")) {
+      var Unit = "%";
+    }
+  } else {
+    var Unit = "Undefined";
+  }
+  //document.getElementById("demo").innerHTML = table;
+  generate_graph(var_url, Unit);
+}
+
+function loadXML(var_url) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      parseXML(this, var_url);
+    }
+  };
+  xhttp.open("GET", url_perfdata, true);
+  xhttp.send();
+}
+
 function readJSON() {
-  $.getJSON("../config.json", function (json) {
+  $.getJSON("../plotly4nagios/config.json", function (json) {
     console.log(json);
-    window.url = json.url_local;
+    window.url = json.url_remote;
+    //window.url = json.url_dynamic + GetQueryString("host") + "&srv=" + GetQueryString("srv") + "&start=" + GetQueryString("start") + "&end=" + GetQueryString("end") + "&view=" + GetQueryString("view");
     window.plot_bgcolor_all = json.plot_bgcolor_all;
     window.paper_bgcolor_all = json.paper_bgcolor_all;
     window.layout_allinone_font_color = json.layout_allinone_font_color;
-    window.url_dynamic_full = json.url_dynamic + GetQueryString("host") + "&srv=" + GetQueryString("srv") + "&start=" + GetQueryString("start") + "&end=" + GetQueryString("end") + "&view=" + GetQueryString("view");
-    window.url_dynamic = json.url_dynamic;
+    window.plot_bgcolor_per_metrics = json.plot_bgcolor_per_metrics;
+    window.paper_bgcolor_per_metrics = json.paper_bgcolor_per_metrics;
+    window.layout_per_metrics_font_color = json.layout_per_metrics_font_color;
+    window.background_color = json.background_color;
+    //window.url_dynamic_full = json.url_dynamic + GetQueryString("host") + "&srv=" + GetQueryString("srv") + "&start=" + GetQueryString("start") + "&end=" + GetQueryString("end") + "&view=" + GetQueryString("view");
+    //window.url_dynamic = json.url_dynamic;
+    //window.url_perfdata = json.url_perfdata + GetQueryString("host")+ "/"  +GetQueryString("srv").replace(/%20/g, '_')+ ".xml";
+    window.url_perfdata = json.url_perfdata_local_file;
+    window.url_xml = json.url_perfdata_local_file + GetQueryString("host") + "/" + GetQueryString("srv").replace(/%20/g, '_') + ".xml";
+    console.log(url);
   });
 }
+
 readJSON();
 
-var LocString = String(window.document.location.href);
-
-
 $(function () {
-
   var start = moment().subtract(1, 'days');
   var end = moment();
 
@@ -27,11 +72,12 @@ $(function () {
       console.log(start.format('X'))
     } else {
       console.log('secondtime')
-      url =
+      var_url =
         url_dynamic + GetQueryString("host") + "&srv=" + GetQueryString("srv") + "&start=" + start.format(
           'YYYY-MM-DD H:mm') + "&end=" + end.format('YYYY-MM-DD H:mm') + "&view=" + GetQueryString(
           "view");
-      generate_graph(url);
+      loadXML(var_url);
+      //   generate_graph(url);
     }
   }
 
@@ -53,48 +99,7 @@ $(function () {
 
 });
 
-//var testvalue = readJSON();
-//console.log(testvalue.url);
-
-function GetQueryString(str) {
-  var rs = new RegExp("(^|)" + str + "=([^\&]*)(\&|$)", "gi").exec(LocString),
-    tmp;
-  if (tmp = rs) return tmp[2];
-  return "";
-}
-
-function clear_div(div) {
-  var div_2_clear = document.getElementById(div);
-  while (div_2_clear.firstChild) {
-    div_2_clear.removeChild(div_2_clear.firstChild);
-  }
-}
-
-
-function loadXML() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      parseXML(this);
-    }
-  };
-  xhttp.open("GET", "../Network_usage.xml", true);
-  xhttp.send();
-}
-
-function parseXML(xml) {
-  var i;
-  var xmlDoc = xml.responseXML;
-  var x = xmlDoc.getElementsByTagName("DATASOURCE");
-  //for (i = 0; i < x.length; i++) {
-  var Unit = x[0].getElementsByTagName("UNIT")[0].childNodes[0].nodeValue;
-  //var Name =  x[i].getElementsByTagName("NAME")[0].childNodes[0].nodeValue;
-  //}
-  //document.getElementById("demo").innerHTML = table;
-  generate_graph(url, Unit);
-}
-
-urlx = window.location.pathname + "?host=" + GetQueryString("host") + "&srv=" + GetQueryString("srv");
+//urlx = window.location.pathname + "?host=" + GetQueryString("host") + "&srv=" + GetQueryString("srv");
 
 function generate_graph(url, Unit) {
   $('#loading').show();
@@ -158,13 +163,11 @@ function generate_graph(url, Unit) {
     var data_all = data_final_all;
     var data_per_metics = data_final_per_metrics;
     console.log(Unit);
-
     var layout_allinone = {
       title: 'Nagios - All in one Graph',
       plot_bgcolor: plot_bgcolor_all,
       paper_bgcolor: paper_bgcolor_all,
       font: {
-
         color: layout_allinone_font_color
       },
       xaxis: {
@@ -182,37 +185,35 @@ function generate_graph(url, Unit) {
       //   tickformat: "%H:%M" // For more formatting types, see: https://github.com/d3/d3-format/blob/master/README.md#locale_format
       // title: 'Date'
       //},
+      plot_bgcolor: plot_bgcolor_per_metrics,
+      paper_bgcolor: paper_bgcolor_per_metrics,
+      font: {
+        color: layout_per_metrics_font_color
+      },
+      xaxis: {
+        title: 'Date'
+      },
+      yaxis: {
+        title: "Unit =" + Unit
+      },
       grid: {
         rows: 3,
         columns: 3,
         pattern: 'independent'
       },
-      yaxis: {
-        title: "Unit =" + Unit
-      },
-
     };
     var config = {
-
       displaylogo: false,
       responsive: true,
-
-
     };
-
 
     $('#loading').hide();
     Plotly.newPlot('DIV_allinone', data_all, layout_allinone, config);
     Plotly.newPlot('DIV_per_metrics', data_per_metics, layout_per_metrics, config);
-  })
+  });
 }
-loadXML();
 
-
-
-$(document).ready(function () {
-  //anything in here will only be called/work when the document is ready.
-  console.log(url);
-  generate_graph(url);
-  //call your function in here, instead of bodyonload
-});
+setTimeout(function () {
+  loadXML(url);
+  document.body.style.backgroundColor = background_color;
+}, 2000);

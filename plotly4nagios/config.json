@@ -1,0 +1,14 @@
+{
+    "url_dynamic": "https://nagios.vikki.in/pnp4nagios/xport/csv?host=",
+    "url_remote": "https://raw.githubusercontent.com/vignesh88/plotly4nagios/main/nagios.csv",
+    "url_local": "nagios.csv",
+    "url_perfdata": "https://nagios.vikki.in/perfdata/",
+    "url_perfdata_local_file": "Network_usage.xml",
+    "plot_bgcolor_all": "#F6F6F7",
+    "paper_bgcolor_all": "#F6F6F7",
+    "layout_allinone_font_color": "black",
+    "plot_bgcolor_per_metrics": "#F6F6F7",
+    "paper_bgcolor_per_metrics": "#F6F6F7",
+    "layout_per_metrics_font_color": "black",
+    "background_color": "#f0f0f0"
+}

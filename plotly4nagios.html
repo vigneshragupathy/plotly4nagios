@@ -1,18 +1,19 @@
+<html>
+
 <head>
-	<!-- Load plotly.js into the DOM -->
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta content="Vignesh Ragupathy" name="author" />
+	<title>Plotly4Nagios</title>
+	<meta name="description" content="refer https://github.com/vignesh88/plotly4nagios" />
 	<script src='js/plotly-latest.min.js'></script>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/moment.min.js"></script>
 	<script type="text/javascript" src="js/daterangepicker.min.js"></script>
-
 	<link rel="stylesheet" type="text/css" href="css/daterangepicker.css" />
 	<link rel="stylesheet" type="text/css" href="css/plotly4nagios.css" />
 	<link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
-<link rel="manifest" href="img/favicon/site.webmanifest">
-
-
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
 </head>
 
 <body>
@@ -23,8 +24,6 @@
 		<i class="fa fa-calendar"></i>&nbsp;
 		<span></span> <i class="fa fa-caret-down"></i>
 	</div>
-
-
 	<br></br>
 	<div id="loading"></div>
 
@@ -35,18 +34,14 @@
 	<div id='DIV_per_metrics'>
 		<!-- Plotly chart will be drawn inside this DIV -->
 	</div>
-	<!--
-	<button type="button" onclick="loadDoc()">Get my CD collection</button> 
-	<br><br>
-	 <table id="demo"></table>  -->
-
-
 </body>
+
 <script src="js/d3-time.v2.min.js"></script>
 <script src="js/d3-time-format.v3.min.js"></script>
 <script>
 	var format = d3.timeFormat("%B %d, %Y");
 	var parseTime = d3.timeParse("%s");
 </script>
-
 <script src="js/plotly4nagios.js"></script>
+
+</html>
