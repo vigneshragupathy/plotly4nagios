@@ -5,9 +5,8 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/vignesh88/plotly4nagios/badge)](https://www.codefactor.io/repository/github/vignesh88/plotly4nagios)
 [![DeepSource](https://deepsource.io/gh/vignesh88/plotly4nagios.svg/?label=active+issues&show_trend=true)](https://deepsource.io/gh/vignesh88/plotly4nagios/?ref=repository-badge)
 
-
-
 ## Installation
+
 ```
 1. Install the pnp4nagios https://support.nagios.com/kb/article/nagios-core-performance-graphs-using-pnp4nagios-801.html
 2. Download plotly4nagios.tar.gz and extract it under /usr/local/plotly4nagios
@@ -19,10 +18,11 @@
 ```
 
 ## Screenshot
+
 ![Alt text](img/screenshot.png?raw=true "Title")
 
-
 ## License
+
 Copyright 2020-2021 © Vignesh Ragupathy. All rights reserved.
 
 Licensed under the [MIT License](https://github.com/vignesh88/plotly4nagios/blob/ed09f8d687014107c8002d92acbc7acd2f62468a/LICENSE)
