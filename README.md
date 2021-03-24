@@ -33,11 +33,7 @@ docker run -dit --name my-running-app -p 8080:80 my-apache2
 docker run -dit --name plotly4nagios -p 8000:80 plotly4nagios
 ```
 
-- Open from the browser and access the URL
-
-```bash
-http://localhost:8000/plotly4nagios.html
-```
+> Open from the browser and view the application at http://localhost:8000/plotly4nagios.html
 
 ## Screenshot
 
