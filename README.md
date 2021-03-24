@@ -34,6 +34,12 @@ docker run -dit --name my-running-app -p 8080:80 my-apache2
 docker run -dit --name plotly4nagios -p 8000:80 plotly4nagios
 ```
 
+Alternatively direct pull and run from docker hub.
+
+```bash
+docker run -d -p 8000:80 --name plotly4nagios vignesh88/plotly4nagios
+```
+
 > Open from the browser and view the application at http://localhost:8000/plotly4nagios.html
 
 ## Screenshot
