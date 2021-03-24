@@ -6,6 +6,13 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/vignesh88/plotly4nagios/badge)](https://www.codefactor.io/repository/github/vignesh88/plotly4nagios)
 [![DeepSource](https://deepsource.io/gh/vignesh88/plotly4nagios.svg/?label=active+issues&show_trend=true)](https://deepsource.io/gh/vignesh88/plotly4nagios/?ref=repository-badge)
 
+## Features
+
+- Easy integration with nagios `notes_url`.
+- Single page view for all performance metrics.
+- Easy template change using configuration variable.
+- Docker container based deploy and run.
+
 ## Installation
 
 - Install the [pnp4nagios](https://support.nagios.com/kb/article/nagios-core-performance-graphs-using-pnp4nagios-801.html)
