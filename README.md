@@ -7,7 +7,7 @@
 
 ## Installation
 
-- Install the pnp4nagios https://support.nagios.com/kb/article/nagios-core-performance-graphs-using-pnp4nagios-801.html
+- Install the [pnp4nagios](https://support.nagios.com/kb/article/nagios-core-performance-graphs-using-pnp4nagios-801.html)
 - Download plotly4nagios.tar.gz and extract it under /usr/local/plotly4nagios
 - Modify the config.json variables according to the environment
 - Copy the plotly4nagios/plotly4nagios.conf to /etc/http/conf.d/ folder and restart httpd
@@ -18,6 +18,26 @@
 ```
 
 - Restart httpd and nagios.
+
+## Installation with docker
+
+- build the docker image using the below command
+
+```bash
+docker run -dit --name my-running-app -p 8080:80 my-apache2
+```
+
+- Run the docker container using the below command
+
+```bash
+docker run -dit --name plotly4nagios -p 8000:80 plotly4nagios
+```
+
+- Open from the browser and access the URL
+
+```bash
+http://localhost:8000/plotly4nagios.html
+```
 
 ## Screenshot
 
