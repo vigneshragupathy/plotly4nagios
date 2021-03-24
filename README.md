@@ -21,7 +21,7 @@
 
 ## Installation with docker
 
-- build the docker image using the below command
+- Build the docker image using the below command
 
 ```bash
 docker run -dit --name my-running-app -p 8080:80 my-apache2
