@@ -1,10 +1,13 @@
 # plotly4nagios
 
+[![My LinkedIn](https://img.shields.io/badge/LinkedIn%20Profile-Vignesh-blue?logo=linkedin)](https://www.linkedin.com/in/vignesh88/)
 ![GitHub](https://img.shields.io/github/license/vignesh88/plotly4nagios)
 [![Build Status](https://travis-ci.com/vignesh88/plotly4nagios.svg?branch=main)](https://travis-ci.com/vignesh88/plotly4nagios)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b5584b07ff944a77a9e1fcd0951c2eb8)](https://app.codacy.com/gh/vignesh88/plotly4nagios?utm_source=github.com&utm_medium=referral&utm_content=vignesh88/plotly4nagios&utm_campaign=Badge_Grade_Settings)
 [![CodeFactor](https://www.codefactor.io/repository/github/vignesh88/plotly4nagios/badge)](https://www.codefactor.io/repository/github/vignesh88/plotly4nagios)
 [![DeepSource](https://deepsource.io/gh/vignesh88/plotly4nagios.svg/?label=active+issues&show_trend=true)](https://deepsource.io/gh/vignesh88/plotly4nagios/?ref=repository-badge)
+
+Plotly4Nagios is a nagios plugin to display the performance data in Graph. It uses the RRD database provided by pnp4nagios and visualize it in interactive graph format using plotly javascript. You can experiment it and report the issue/feedback for further enhancement.
 
 ## Features
 
@@ -13,9 +16,12 @@
 - Easy template change using configuration variable.
 - Docker container based deploy and run.
 
+## Prerequisite
+
+- [pnp4nagios](https://support.nagios.com/kb/article/nagios-core-performance-graphs-using-pnp4nagios-801.html)
+
 ## Installation
 
-- Install the [pnp4nagios](https://support.nagios.com/kb/article/nagios-core-performance-graphs-using-pnp4nagios-801.html)
 - Download plotly4nagios.tar.gz and extract it under /usr/local/plotly4nagios
 - Modify the config.json variables according to the environment
 - Copy the plotly4nagios/plotly4nagios.conf to /etc/http/conf.d/ folder and restart httpd
