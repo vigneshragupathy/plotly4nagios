@@ -49,6 +49,8 @@ function readJSON() {
     window.paper_bgcolor_per_metrics = json.paper_bgcolor_per_metrics;
     window.layout_per_metrics_font_color = json.layout_per_metrics_font_color;
     window.background_color = json.background_color;
+    window.heading_color = json.heading_color;
+    window.datetimepicker_color = json.datetimepicker_color;
     //window.url_dynamic_full = json.url_dynamic + GetQueryString("host") + "&srv=" + GetQueryString("srv") + "&start=" + GetQueryString("start") + "&end=" + GetQueryString("end") + "&view=" + GetQueryString("view");
     //window.url_dynamic = json.url_dynamic;
     //window.url_perfdata = json.url_perfdata + GetQueryString("host")+ "/"  +GetQueryString("srv").replace(/%20/g, '_')+ ".xml";
@@ -216,4 +218,6 @@ function generate_graph(url, Unit) {
 setTimeout(function () {
   loadXML(url);
   document.body.style.backgroundColor = background_color;
+  document.body.style.color = heading_color;
+  document.getElementById("reportrange").style.backgroundColor = datetimepicker_color;
 }, 2000);

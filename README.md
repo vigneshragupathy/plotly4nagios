@@ -59,11 +59,11 @@ docker run -d -p 8000:80 --name plotly4nagios vignesh88/plotly4nagios
 
 ### Default mode
 
-![Alt text](img/screenshot.png?raw=true "Title")
+!['Default mode'](https://raw.githubusercontent.com/vignesh88/plotly4nagios/main/img/screenshot.png)
 
 ### Dark mode
 
-![Alt text](img/screenshot_darkmode.png?raw=true "Title")
+!['Dark mode'](https://raw.githubusercontent.com/vignesh88/plotly4nagios/main/img/screenshot_darkmode.png)
 
 ## License
 

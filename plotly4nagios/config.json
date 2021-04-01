@@ -4,11 +4,13 @@
     "url_local": "nagios.csv",
     "url_perfdata": "https://nagios.vikki.in/perfdata/",
     "url_perfdata_local_file": "Network_usage.xml",
-    "plot_bgcolor_all": "#F6F6F7",
-    "paper_bgcolor_all": "#F6F6F7",
-    "layout_allinone_font_color": "black",
-    "plot_bgcolor_per_metrics": "#F6F6F7",
-    "paper_bgcolor_per_metrics": "#F6F6F7",
-    "layout_per_metrics_font_color": "black",
-    "background_color": "#f0f0f0"
+    "plot_bgcolor_all": "#111111",
+    "paper_bgcolor_all": "#111111",
+    "layout_allinone_font_color": "white",
+    "plot_bgcolor_per_metrics": "#111111",
+    "paper_bgcolor_per_metrics": "#111111",
+    "layout_per_metrics_font_color": "white",
+    "background_color": "#161625",
+    "heading_color": "#A9A9A9",
+    "datetimepicker_color": "#161625"
 }
