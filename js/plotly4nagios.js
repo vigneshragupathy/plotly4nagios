@@ -40,8 +40,8 @@ function loadXML(var_url) {
 function readJSON() {
   $.getJSON("../plotly4nagios/config.json", function (json) {
     console.log(json);
-    window.url = json.url_remote;
-    //window.url = json.url_dynamic + GetQueryString("host") + "&srv=" + GetQueryString("srv") + "&start=" + GetQueryString("start") + "&end=" + GetQueryString("end") + "&view=" + GetQueryString("view");
+    //window.url = json.url_remote;
+    window.url = json.url_dynamic + GetQueryString("host") + "&srv=" + GetQueryString("srv") + "&start=" + GetQueryString("start") + "&end=" + GetQueryString("end") + "&view=" + GetQueryString("view");
     window.plot_bgcolor_all = json.plot_bgcolor_all;
     window.paper_bgcolor_all = json.paper_bgcolor_all;
     window.layout_allinone_font_color = json.layout_allinone_font_color;
@@ -53,9 +53,9 @@ function readJSON() {
     window.datetimepicker_color = json.datetimepicker_color;
     //window.url_dynamic_full = json.url_dynamic + GetQueryString("host") + "&srv=" + GetQueryString("srv") + "&start=" + GetQueryString("start") + "&end=" + GetQueryString("end") + "&view=" + GetQueryString("view");
     //window.url_dynamic = json.url_dynamic;
-    //window.url_perfdata = json.url_perfdata + GetQueryString("host")+ "/"  +GetQueryString("srv").replace(/%20/g, '_')+ ".xml";
-    window.url_perfdata = json.url_perfdata_local_file;
-    window.url_xml = json.url_perfdata_local_file + GetQueryString("host") + "/" + GetQueryString("srv").replace(/%20/g, '_') + ".xml";
+    window.url_perfdata = json.url_perfdata + GetQueryString("host")+ "/"  +GetQueryString("srv").replace(/%20/g, '_')+ ".xml";
+    //window.url_perfdata = json.url_perfdata_local_file;
+    window.url_xml = json.url_perfdata + GetQueryString("host") + "/" + GetQueryString("srv").replace(/%20/g, '_') + ".xml";
     console.log(url);
   });
 }
