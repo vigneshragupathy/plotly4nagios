@@ -47,6 +47,7 @@ sudo sh -c "echo '' >> /etc/nagios4/objects/templates.cfg"
 
 sudo sh -c "sed -i '/name.*generic-host/a\        use                             host-pnp' /etc/nagios4/objects/templates.cfg"
 sudo sh -c "sed -i '/name.*generic-service/a\        use                             service-pnp' /etc/nagios4/objects/templates.cfg"
+sudo sh -c "sed -i 's/^perfdata_file_processing_interval = 15/perfdata_file_processing_interval = 5/g' /usr/local/pnp4nagios/etc/npcd.cfg"
 
 #For service
 nagios4 -d /etc/nagios4/nagios.cfg

@@ -25,7 +25,7 @@ COPY plotly4nagios/Input.php /usr/local/pnp4nagios/lib/kohana/system/libraries/
 COPY plotly4nagios/data.php /usr/local/pnp4nagios/share/application/models/
 COPY plotly4nagios/plotly4nagios.conf /etc/apache2/sites-enabled/
 COPY plotly4nagios/pnp4nagios.conf /etc/apache2/sites-enabled/
-COPY plotly4nagios/cgi.conf /etc/nagios4/
+COPY plotly4nagios/cgi.cfg /etc/nagios4/
 COPY . /usr/local/plotly4nagios/
 RUN a2enmod rewrite
 RUN a2enmod headers

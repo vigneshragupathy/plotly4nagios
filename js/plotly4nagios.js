@@ -52,7 +52,7 @@ function readJSON() {
     window.heading_color = json.heading_color;
     window.datetimepicker_color = json.datetimepicker_color;
     //window.url_dynamic_full = json.url_dynamic + GetQueryString("host") + "&srv=" + GetQueryString("srv") + "&start=" + GetQueryString("start") + "&end=" + GetQueryString("end") + "&view=" + GetQueryString("view");
-    //window.url_dynamic = json.url_dynamic;
+    window.url_dynamic = json.url_dynamic;
     window.url_perfdata = json.url_perfdata + GetQueryString("host")+ "/"  +GetQueryString("srv").replace(/%20/g, '_')+ ".xml";
     //window.url_perfdata = json.url_perfdata_local_file;
     window.url_xml = json.url_perfdata + GetQueryString("host") + "/" + GetQueryString("srv").replace(/%20/g, '_') + ".xml";
