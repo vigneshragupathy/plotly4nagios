@@ -9,6 +9,8 @@
 
 Plotly4Nagios is a nagios plugin to display the performance data in Graph. It uses the RRD database provided by pnp4nagios and visualize it in interactive graph format using plotly javascript. You can experiment it and report the issue/feedback for further enhancement.
 
+> Plotly4Nagios is accepted and listed under official [nagios addons](https://exchange.nagios.org/directory/Addons/Graphing-and-Trending/Plotly4Nagios/details)
+
 ## Features
 
 - Easy integration with nagios `notes_url`.
