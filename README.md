@@ -58,7 +58,7 @@ docker run -d -p 80:80 --name plotly4nagios vignesh88/plotly4nagios
 
 > Open from the browser and view the application at http://localhost/nagios
 
-## Login details
+### Login details
 
 - Username : nagiosadmin
 - Password : nagios
@@ -68,10 +68,6 @@ docker run -d -p 80:80 --name plotly4nagios vignesh88/plotly4nagios
 !['demo'](https://raw.githubusercontent.com/vignesh88/plotly4nagios/main/img/plotly4nagios.gif)
 
 ## Screenshot
-
-### Default mode
-
-!['Default mode'](https://raw.githubusercontent.com/vignesh88/plotly4nagios/main/img/screenshot.png)
 
 ### Dark mode
 
