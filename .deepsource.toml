@@ -1,9 +1,13 @@
 version = 1
 
 [[analyzers]]
-name = "javascript"
+name = "php"
 enabled = true
 
-  [analyzers.meta]
-  style_guide = "google"
-  environment = ["browser"]
+[[analyzers]]
+name = "shell"
+enabled = true
+
+[[analyzers]]
+name = "javascript"
+enabled = true
